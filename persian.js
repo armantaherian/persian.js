@@ -140,6 +140,29 @@
         return this;
     }
 
+    /**
+    * Used for fix Persian Zero-width
+    * e.g. convert می خواهم to می‌خواهم
+    *
+    * @api private
+    * @method _fixZeroWidth
+    * @param {String} value 
+    * @return {Object} PersianJs Object
+    */
+    function _fixZeroWidth(value) {
+        if (!value) {
+            return;
+        }
+        var persianString              = ["می ", " ها", "ه ای ", "ه ی "],
+            persianStringWithZeroWidth = [ "می‌",  "‌ها",  "ه‌ای ",  "ه‌ی "];
+
+        for (var i = 0, charsLen = persianString.length; i < charsLen; i++) {
+            value = value.replace(new RegExp(persianString[i], "g"), persianStringWithZeroWidth[i]);
+        }
+        this._str = value;
+        return this;
+    }
+
     var persianJs = function(inputStr) {
         if (!inputStr || inputStr === "") {
             throw new Error("Input is null or empty.");
@@ -184,6 +207,9 @@
         },
         switchKey: function() {
             return _switchKey.call(this, this._str);
+        },
+        fixZeroWidth: function() {
+            return _fixZeroWidth.call(this, this._str);
         }
     };
 

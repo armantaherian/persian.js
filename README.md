@@ -60,6 +60,16 @@ Example:
 
 persianJs("لخخلمث").switchKey().toString(); //returns: google
 ````
+###6) Fix zero-width space
+----------
+Used for converting space to zero-width space.
+
+Example:
+
+```javascript
+
+persianJs("لانه ی | لانه های | لانه ای را تمیز می کنم.").switchKey().toString(); //returns: لانه‌ی | لانه‌های | لانه‌ای را تمیز می‌کنم.
+````
 
 ###Chainable using
 ----------
@@ -74,7 +84,6 @@ persianJs("علي٤2465").arabicChar().englishNumber().arabicNumber().toString()
 
 
 ##Roadmap
-- Zero-width non-joiner correction (e.g. convert می خواهم to می‌خواهم)
 - Make library configurable (e.g. setting the language)
 - Add `uglifyjs` to MakeFile in order to make `.min` version of script (Related to issue #7)
 
